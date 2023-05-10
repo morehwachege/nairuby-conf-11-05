@@ -12,9 +12,18 @@ puts "🌱 Start seeding!"
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     email = Faker::Internet.email(name: "#{first_name} #{last_name}")
-    age = Faker::Number.between(from: 18, to: 65)
-  
+    age = Faker::Number.between(from: 10, to: 100)
+
     User.create(first_name: first_name, last_name: last_name, email: email, age: age)
-  end
+end
+
+
+# Create 10 posts with random content and user IDs
+10.times do
+  Post.create!(
+    content: Faker::Lorem.paragraph(sentence_count: 2),
+    user_id: rand(1..User.count)
+  )
+end
 
 puts "Done seeding ;)"
